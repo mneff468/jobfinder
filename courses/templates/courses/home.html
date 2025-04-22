@@ -1,0 +1,37 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Welcome to JobFinder{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Welcome to JobFinder</h1>
+    </div>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h2>Your Gateway to a Successful Career</h2>
+            <p>
+                JobFinder is here to help you navigate the job market after college graduation. Explore our resources to build a standout resume, learn effective job search strategies, and ace your interviews. Browse our job board to find opportunities that match your skills and interests.
+            </p>
+            <div class="nav-cards">
+                <div class="card">
+                    <a href="{% url 'job_list' %}">Job Board</a>
+                    <p>Find your dream job from our curated listings.</p>
+                </div>
+                <div class="card">
+                    <a href="{% url 'resume_tips' %}">Resume Tips</a>
+                    <p>Learn how to craft a winning resume.</p>
+                </div>
+                <div class="card">
+                    <a href="{% url 'job_search' %}">Job Search Tips</a>
+                    <p>Discover strategies to find the right job.</p>
+                </div>
+                <div class="card">
+                    <a href="{% url 'interview_tips' %}">Interview Tips</a>
+                    <p>Prepare to impress your future employer.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

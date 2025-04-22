@@ -1,0 +1,44 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Your Profile</h1>
+    </div>
+
+    <div class="container">
+        <div class="profile-section">
+            <h2><i class="fas fa-user"></i> Welcome, {{ user.username }}</h2>
+            <p>Email: {{ user.email }}</p>
+        </div>
+
+        <!-- Saved Jobs -->
+        <div class="saved-jobs-section">
+            <h2><i class="fas fa-bookmark"></i> Saved Jobs</h2>
+            {% if saved_jobs %}
+                <div class="job-list">
+                    {% for saved_job in saved_jobs %}
+                        <div class="job-card card">
+                            <h3>{{ saved_job.job.title }}</h3>
+                            <p><strong>Company:</strong> {{ saved_job.job.company }}</p>
+                            <p><strong>Location:</strong> {{ saved_job.job.location }}</p>
+                            <p>{{ saved_job.job.description|truncatewords:20 }}</p>
+                            <div class="job-actions">
+                                <a href="{% url 'job_detail' saved_job.job.id %}" class="btn btn-view">
+                                    <i class="fas fa-eye"></i> View Job
+                                </a>
+                                <a href="{% url 'unsave_job' saved_job.job.id %}" class="btn btn-unsave">
+                                    <i class="fas fa-trash"></i> Remove
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>You haven't saved any jobs yet. Visit the <a href="{% url 'job_list' %}">Job Board</a> to find opportunities!</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

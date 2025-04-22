@@ -1,0 +1,30 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Job Search Tips{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Job Search Tips</h1>
+    </div>
+
+    <div class="container">
+        <div class="resource-section">
+            <h2><i class="fas fa-search"></i> Effective Job Search Strategies</h2>
+            <ul>
+                <li><strong>Network:</strong> Reach out to alumni, professors, and professionals on platforms like LinkedIn.</li>
+                <li><strong>Use Job Boards:</strong> Check sites like JobFinder, Indeed, and LinkedIn for opportunities.</li>
+                <li><strong>Research Companies:</strong> Target companies that align with your values and career goals.</li>
+                <li><strong>Apply Early:</strong> Submit applications as soon as possible to increase your chances.</li>
+                <li><strong>Follow Up:</strong> Send a polite follow-up email after applying to show interest.</li>
+            </ul>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="back-link">
+            <a href="{% url 'home' %}" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+{% endblock %}

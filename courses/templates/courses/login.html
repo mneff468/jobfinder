@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | JobFinder</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add Google Fonts (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <ul>
+            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> <span>Home</span></a></li>
+            <li><a href="{% url 'job_list' %}"><i class="fas fa-briefcase"></i> <span>Job Board</span></a></li>
+            <li><a href="{% url 'resume_tips' %}"><i class="fas fa-file-alt"></i> <span>Resume Tips</span></a></li>
+            <li><a href="{% url 'job_search' %}"><i class="fas fa-search"></i> <span>Job Search Tips</span></a></li>
+            <li><a href="{% url 'interview_tips' %}"><i class="fas fa-comments"></i> <span>Interview Tips</span></a></li>
+            <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+            {% if user.is_staff %}
+                <li><a href="{% url 'post_job' %}"><i class="fas fa-plus-circle"></i> <span>Post Job</span></a></li>
+            {% endif %}
+            <li class="user-info">
+                <span><i class="fas fa-user-circle"></i> {{ user.username }}</span>
+                <a href="{% url 'custom_logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="auth-container">
+            <!-- Login Form -->
+            <div class="auth-form login-form card">
+                <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+                {% if error %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endif %}
+                <form method="post" action="{% url 'custom_login' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="login">
+                    <p>
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" required>
+                    </p>
+                    <p>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" required>
+                    </p>
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="auth-form register-form card">
+                <h2><i class="fas fa-user-plus"></i> Register</h2>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <form method="post" action="{% url 'custom_login' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="register">
+                    <p>
+                        <label for="reg_username">Username:</label>
+                        <input type="text" name="reg_username" id="reg_username" required>
+                    </p>
+                    <p>
+                        <label for="reg_email">Email:</label>
+                        <input type="email" name="reg_email" id="reg_email" required>
+                    </p>
+                    <p>
+                        <label for="reg_password">Password:</label>
+                        <input type="password" name="reg_password" id="reg_password" required>
+                    </p>
+                    <p>
+                        <label for="reg_password_confirm">Confirm Password:</label>
+                        <input type="password" name="reg_password_confirm" id="reg_password_confirm" required>
+                    </p>
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

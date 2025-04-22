@@ -1,0 +1,30 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Resume Tips{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Resume Tips</h1>
+    </div>
+
+    <div class="container">
+        <div class="resource-section">
+            <h2><i class="fas fa-file-alt"></i> Build a Winning Resume</h2>
+            <ul>
+                <li><strong>Tailor Your Resume:</strong> Customize your resume for each job by highlighting relevant skills and experiences.</li>
+                <li><strong>Keep It Concise:</strong> Aim for a one-page resume unless you have extensive experience.</li>
+                <li><strong>Use Action Verbs:</strong> Start bullet points with strong verbs like "developed," "led," or "analyzed."</li>
+                <li><strong>Quantify Achievements:</strong> Include numbers to show impact (e.g., "Increased sales by 20%").</li>
+                <li><strong>Proofread:</strong> Double-check for typos and grammatical errors to make a professional impression.</li>
+            </ul>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="back-link">
+            <a href="{% url 'home' %}" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+{% endblock %}

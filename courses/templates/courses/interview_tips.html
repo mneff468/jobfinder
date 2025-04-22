@@ -1,0 +1,30 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Interview Tips{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Interview Tips</h1>
+    </div>
+
+    <div class="container">
+        <div class="resource-section">
+            <h2><i class="fas fa-comments"></i> Ace Your Interview</h2>
+            <ul>
+                <li><strong>Prepare Answers:</strong> Practice common questions like "Tell me about yourself" and "What are your strengths?"</li>
+                <li><strong>Research the Company:</strong> Understand their mission, values, and recent achievements.</li>
+                <li><strong>Dress Appropriately:</strong> Choose professional attire that matches the company culture.</li>
+                <li><strong>Ask Questions:</strong> Show interest by asking about the role, team, or company goals.</li>
+                <li><strong>Follow Up:</strong> Send a thank-you email after the interview to express gratitude.</li>
+            </ul>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="back-link">
+            <a href="{% url 'home' %}" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+{% endblock %}
