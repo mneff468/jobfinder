@@ -22,8 +22,25 @@ body {
     box-shadow: 2px 0 10px rgba(0,0,0,0.2);
 }
 
-.sidebar:hover {
-    width: 200px; /* Expanded width */
+.sidebar-toggle {
+    display: none; /* Hidden by default, shown on mobile */
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sidebar-toggle i {
+    font-size: 20px;
+    color: white;
+}
+
+.sidebar.expanded {
+    width: 200px;
+}
+
+.sidebar.expanded a span,
+.sidebar.expanded .user-info span {
+    display: inline;
 }
 
 .sidebar ul {
@@ -59,14 +76,16 @@ body {
     margin-left: 10px;
 }
 
-.sidebar:hover a span {
-    display: inline; /* Show text when sidebar is expanded */
-}
-
 .sidebar a:hover {
     background-color: #FFD700; /* Gold */
     color: #333;
     text-decoration: none;
+}
+
+.sidebar a.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .sidebar .user-info {
@@ -82,12 +101,6 @@ body {
     font-size: 14px;
     font-weight: 300;
     margin-bottom: 10px;
-}
-
-.sidebar:hover .user-info span {
-    display: flex; /* Show when expanded */
-    align-items: center;
-    gap: 10px;
 }
 
 .sidebar .user-info a {
@@ -109,10 +122,85 @@ body {
     transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands */
 }
 
-.sidebar:hover ~ .main-content {
-    margin-left: 200px; /* Adjust for expanded sidebar */
+.sidebar:hover ~ .main-content,
+.sidebar.expanded ~ .main-content {
+    margin-left: 200px;
 }
 
+/* Auth Container (Login and Register Forms) */
+.auth-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.auth-form {
+    background: #fff;
+    border: 2px solid #FFD700; /* Gold border */
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.auth-form h2 {
+    color: #2E7D32;
+    font-size: 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-form form p {
+    margin-bottom: 15px;
+}
+
+.auth-form form label {
+    display: block;
+    font-weight: 600;
+    color: #2E7D32;
+    margin-bottom: 5px;
+}
+
+.auth-form form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.auth-form form input:focus {
+    border-color: #4A90E2; /* Soft blue */
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.auth-form form button {
+    width: 100%;
+    background: linear-gradient(to right, #2E7D32, #4CAF50); /* Green gradient */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.auth-form form button:hover {
+    background: #FFD700; /* Gold */
+    color: #333;
+    transform: translateY(-2px);
+}
+
+/* General Container */
 .container {
     max-width: 100%;
     background: #FFF8E1; /* Light cream */
@@ -272,6 +360,17 @@ form textarea:focus {
     transform: translateY(-2px);
 }
 
+.btn-delete {
+    background-color: #D32F2F; /* Red */
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #FFD700; /* Gold */
+    color: #333;
+    transform: translateY(-2px);
+}
+
 .btn-unsave {
     background-color: #D32F2F; /* Red */
     color: white;
@@ -366,6 +465,109 @@ form textarea:focus {
     margin-bottom: 30px;
 }
 
+/* Tutorial List Page */
+.create-tutorial-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tutorials-section {
+    margin-bottom: 40px;
+}
+
+.tutorials-section h2 {
+    color: #2E7D32;
+    font-size: 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tutorial-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.tutorial-card {
+    background: #fff;
+    border: 2px solid #FFD700; /* Gold border */
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-5px);
+    border-color: #2E7D32; /* Green border on hover */
+}
+
+.tutorial-card h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #2E7D32;
+}
+
+.tutorial-card p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.tutorial-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+/* Post Tutorial Page */
+.post-tutorial-form {
+    padding: 20px;
+}
+
+.post-tutorial-form h2 {
+    color: #2E7D32;
+    font-size: 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Confirm Delete Page */
+.confirm-delete {
+    text-align: center;
+    padding: 20px;
+}
+
+.confirm-delete h2 {
+    color: #D32F2F; /* Red */
+    font-size: 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.confirm-delete p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.confirm-delete form {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Job List Section */
 .jobs-section {
     margin-bottom: 40px;
 }
@@ -418,11 +620,12 @@ form textarea:focus {
     display: flex;
     gap: 10px;
     justify-content: center;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
 }
 
 /* Job Detail Page */
 .job-header {
-    background: linear-gradient(to right, #2E7D32, #4CAF50); /* Green gradient */
+    background: linear-gradient(to right, # manière2E7D32, #4CAF50); /* Green gradient */
     color: white;
     padding: 20px;
     text-align: center;
@@ -542,6 +745,19 @@ form textarea:focus {
     gap: 10px;
 }
 
+.saved-tutorials-section {
+    margin-bottom: 30px;
+}
+
+.saved-tutorials-section h2 {
+    color: #2E7D32;
+    font-size: 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .sidebar {
@@ -549,7 +765,16 @@ form textarea:focus {
     }
 
     .sidebar:hover {
-        width: 150px; /* Smaller expanded width on mobile */
+        width: 50px; /* Disable hover on mobile */
+    }
+
+    .sidebar:hover a span,
+    .sidebar:hover .user-info span {
+        display: none;
+    }
+
+    .sidebar.expanded {
+        width: 150px;
     }
 
     .main-content {
@@ -557,7 +782,15 @@ form textarea:focus {
     }
 
     .sidebar:hover ~ .main-content {
-        margin-left: 150px; /* Adjust for smaller expanded sidebar */
+        margin-left: 50px; /* No change on hover */
+    }
+
+    .sidebar.expanded ~ .main-content {
+        margin-left: 150px;
+    }
+
+    .sidebar-toggle {
+        display: block; /* Show toggle button on mobile */
     }
 
     .sidebar a {
@@ -572,7 +805,10 @@ form textarea:focus {
     .sidebar .user-info span {
         font-size: 12px;
     }
-    
+
+    .auth-form {
+        max-width: 100%;
+    }
 
     .page-header h1 {
         font-size: 24px;
@@ -580,26 +816,33 @@ form textarea:focus {
 
     .welcome-section h2,
     .jobs-section h2,
+    .tutorials-section h2,
     .job-header h1,
     .job-overview h2,
     .post-job-form h2,
+    .post-tutorial-form h2,
+    .confirm-delete h2,
     .resource-section h2,
     .profile-section h2,
-    .saved-jobs-section h2 {
+    .saved-jobs-section h2,
+    .saved-tutorials-section h2 {
         font-size: 20px;
     }
 
     .card,
-    .job-card {
+    .job-card,
+    .tutorial-card {
         width: 100%;
         max-width: 350px;
     }
 
-    .job-card h3 {
+    .job-card h3,
+    .tutorial-card h3 {
         font-size: 18px;
     }
 
-    .job-card p {
+    .job-card p,
+    .tutorial-card p {
         font-size: 13px;
     }
 
@@ -608,5 +851,27 @@ form textarea:focus {
     .resource-section li,
     .profile-section p {
         font-size: 14px;
+    }
+
+    .confirm-delete form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tutorial-actions,
+    .job-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tutorial-actions .btn,
+    .job-actions .btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .saved-label {
+        margin: 5px 0;
     }
 }

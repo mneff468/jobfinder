@@ -1,0 +1,22 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Delete Job | JobFinder{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="confirm-delete">
+        <h2><i class="fas fa-exclamation-triangle"></i> Confirm Deletion</h2>
+        <p>Are you sure you want to delete the job "<strong>{{ job.title }}</strong>"?</p>
+        <p>This action cannot be undone.</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-delete">
+                <i class="fas fa-trash-alt"></i> Yes, Delete
+            </button>
+            <a href="{% url 'job_list' %}" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Cancel
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

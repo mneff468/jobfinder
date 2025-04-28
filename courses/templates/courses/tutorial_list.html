@@ -1,0 +1,69 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Tutorials | JobFinder{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Header -->
+    <div class="page-header">
+        <h1><i class="fas fa-book"></i> Courses & Tutorials</h1>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Create Tutorial Section (Admins Only) -->
+    {% if user.is_staff %}
+        <div class="create-tutorial-section">
+            <a href="{% url 'post_tutorial' %}" class="btn btn-create">
+                <i class="fas fa-plus-circle"></i> Post a Tutorial
+            </a>
+        </div>
+    {% endif %}
+
+    <!-- Tutorials Section -->
+    <div class="tutorials-section">
+        <h2><i class="fas fa-book"></i> Available Tutorials</h2>
+        {% if tutorials %}
+            <div class="tutorial-list">
+                {% for tutorial in tutorials %}
+                    <div class="tutorial-card">
+                        <h3>{{ tutorial.title }}</h3>
+                        <p><strong>Company:</strong> {{ tutorial.company }}</p>
+                        <p>{{ tutorial.description }}</p>
+                        <p><strong>Posted on:</strong> {{ tutorial.posted_at|date:"F d, Y" }}</p>
+                        <div class="tutorial-actions">
+                            <a href="{{ tutorial.link }}" target="_blank" class="btn btn-view">
+                                <i class="fas fa-external-link-alt"></i> View Tutorial
+                            </a>
+                            {% if tutorial.id in saved_tutorials %}
+                                <span class="saved-label"><i class="fas fa-check-circle"></i> Saved</span>
+                                <a href="{% url 'unsave_tutorial' tutorial.id %}" class="btn btn-unsave">
+                                    <i class="fas fa-minus-circle"></i> Unsave
+                                </a>
+                            {% else %}
+                                <a href="{% url 'save_tutorial' tutorial.id %}" class="btn btn-save">
+                                    <i class="fas fa-save"></i> Save
+                                </a>
+                            {% endif %}
+                            {% if user == tutorial.posted_by %}
+                                <a href="{% url 'delete_tutorial' tutorial.id %}" class="btn btn-delete">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No tutorials available at the moment.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

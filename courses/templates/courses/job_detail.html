@@ -1,48 +1,61 @@
 {% extends 'courses/base.html' %}
 
-{% block title %}{{ job.title }}{% endblock %}
+{% block title %}{{ job.title }} | JobFinder{% endblock %}
 
 {% block content %}
+<div class="container">
     <!-- Job Header -->
     <div class="job-header">
-        <h1>{{ job.title }} at {{ job.company }}</h1>
+        <h1>{{ job.title }}</h1>
+        <p>{{ job.company }} - {{ job.location }}</p>
     </div>
 
-    <div class="container">
-        <!-- Job Overview -->
-        <div class="job-overview card">
-            <h2><i class="fas fa-info-circle"></i> Job Overview</h2>
-            <p><strong>Location:</strong> {{ job.location }}</p>
-            <p><strong>Posted on:</strong> {{ job.posted_at|date:"Y-m-d H:i" }}</p>
-            <p><strong>Description:</strong></p>
-            <p>{{ job.description }}</p>
-        </div>
+    <!-- Messages -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-        <!-- Apply Button -->
-        <div class="apply-link">
-            <a href="{{ job.application_link }}" class="btn btn-apply" target="_blank">
-                <i class="fas fa-external-link-alt"></i> Apply Now
-            </a>
-        </div>
-
-        <!-- Save/Unsave Job -->
-        <div class="save-link">
-            {% if is_saved %}
-                <a href="{% url 'unsave_job' job.id %}" class="btn btn-unsave">
-                    <i class="fas fa-bookmark"></i> Unsave Job
-                </a>
-            {% else %}
-                <a href="{% url 'save_job' job.id %}" class="btn btn-save">
-                    <i class="fas fa-bookmark"></i> Save Job
-                </a>
-            {% endif %}
-        </div>
-
-        <!-- Back to Jobs -->
-        <div class="back-link">
-            <a href="{% url 'job_list' %}" class="btn btn-back">
-                <i class="fas fa-arrow-left"></i> Back to Job Board
-            </a>
-        </div>
+    <!-- Job Overview -->
+    <div class="job-overview">
+        <h2><i class="fas fa-briefcase"></i> Job Overview</h2>
+        <p><strong>Posted on:</strong> {{ job.posted_at|date:"F d, Y" }}</p>
+        <p>{{ job.description }}</p>
     </div>
+
+    <!-- Apply Link -->
+    <div class="apply-link">
+        <a href="{{ job.application_link }}" target="_blank" class="btn btn-apply">
+            <i class="fas fa-external-link-alt"></i> Apply Now
+        </a>
+        {% if user == job.posted_by %}
+            <a href="{% url 'delete_job' job.id %}" class="btn btn-delete">
+                <i class="fas fa-trash-alt"></i> Delete Job
+            </a>
+        {% endif %}
+    </div>
+
+    <!-- Save/Unsave Link -->
+    <div class="save-link">
+        {% if is_saved %}
+            <a href="{% url 'unsave_job' job.id %}" class="btn btn-unsave">
+                <i class="fas fa-minus-circle"></i> Unsave Job
+            </a>
+        {% else %}
+            <a href="{% url 'save_job' job.id %}" class="btn btn-save">
+                <i class="fas fa-save"></i> Save Job
+            </a>
+        {% endif %}
+    </div>
+
+    <!-- Back Link -->
+    <div class="back-link">
+        <a href="{% url 'job_list' %}" class="btn btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Job List
+        </a>
+    </div>
+</div>
 {% endblock %}

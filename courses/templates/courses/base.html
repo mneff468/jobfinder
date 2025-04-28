@@ -10,49 +10,47 @@
 </head>
 <body>
     <!-- Sidebar -->
-    <!-- Sidebar -->
-<nav class="sidebar">
-    <ul>
-        {% if user.is_authenticated %}
-            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> <span>Home</span></a></li>
-            <li><a href="{% url 'job_list' %}"><i class="fas fa-briefcase"></i> <span>Job Board</span></a></li>
-            <li><a href="{% url 'resume_tips' %}"><i class="fas fa-file-alt"></i> <span>Resume Tips</span></a></li>
-            <li><a href="{% url 'job_search' %}"><i class="fas fa-search"></i> <span>Job Search Tips</span></a></li>
-            <li><a href="{% url 'interview_tips' %}"><i class="fas fa-comments"></i> <span>Interview Tips</span></a></li>
-            <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
-            {% if user.is_staff %}
-                <li><a href="{% url 'post_job' %}"><i class="fas fa-plus-circle"></i> <span>Post Job</span></a></li>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-toggle"><i class="fas fa-bars"></i></div>
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                <li><a href="{% url 'job_list' %}"><i class="fas fa-briefcase"></i> <span>Job Board</span></a></li>
+                <li><a href="{% url 'tutorial_list' %}"><i class="fas fa-book"></i> <span>Tutorials</span></a></li>
+                <li><a href="{% url 'resume_tips' %}"><i class="fas fa-file-alt"></i> <span>Resume Tips</span></a></li>
+                <li><a href="{% url 'job_search' %}"><i class="fas fa-search"></i> <span>Job Search Tips</span></a></li>
+                <li><a href="{% url 'interview_tips' %}"><i class="fas fa-comments"></i> <span>Interview Tips</span></a></li>
+                <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+                {% if user.is_staff %}
+                    <li><a href="{% url 'post_job' %}"><i class="fas fa-plus-circle"></i> <span>Post Job</span></a></li>
+                    <li><a href="{% url 'post_tutorial' %}"><i class="fas fa-plus-circle"></i> <span>Post Tutorial</span></a></li>
+                {% endif %}
+                <li class="user-info">
+                    <span><i class="fas fa-user-circle"></i> {{ user.username }}</span>
+                    <a href="{% url 'custom_logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+                </li>
+            {% else %}
+                <li><a href="#" class="disabled"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                <li><a href="#" class="disabled"><i class="fas fa-briefcase"></i> <span>Job Board</span></a></li>
+                <li><a href="#" class="disabled"><i class="fas fa-book"></i> <span>Tutorials</span></a></li>
+                <li><a href="#" class="disabled"><i class="fas fa-file-alt"></i> <span>Resume Tips</span></a></li>
+                <li><a href="#" class="disabled"><i class="fas fa-search"></i> <span>Job Search Tips</span></a></li>
+                <li><a href="#" class="disabled"><i class="fas fa-comments"></i> <span>Interview Tips</span></a></li>
+                <li><a href="#" class="disabled"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+                <li class="user-info">
+                    <span><i class="fas fa-user-circle"></i> Guest</span>
+                    <a href="{% url 'custom_login' %}"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
+                </li>
             {% endif %}
-            <li class="user-info">
-                <span><i class="fas fa-user-circle"></i> {{ user.username }}</span>
-                <a href="{% url 'custom_logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
-            </li>
-        {% else %}
-            <li><a href="#" class="disabled"><i class="fas fa-home"></i> <span>Home</span></a></li>
-            <li><a href="#" class="disabled"><i class="fas fa-briefcase"></i> <span>Job Board</span></a></li>
-            <li><a href="#" class="disabled"><i class="fas fa-file-alt"></i> <span>Resume Tips</span></a></li>
-            <li><a href="#" class="disabled"><i class="fas fa-search"></i> <span>Job Search Tips</span></a></li>
-            <li><a href="#" class="disabled"><i class="fas fa-comments"></i> <span>Interview Tips</span></a></li>
-            <li><a href="#" class="disabled"><i class="fas fa-user"></i> <span>Profile</span></a></li>
-            <li class="user-info">
-                <span><i class="fas fa-user-circle"></i> Guest</span>
-                <a href="{% url 'custom_login' %}"><i class="fas fa-sign-in-alt"></i> <span>Login</span></a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
+        </ul>
+    </nav>
 
     <!-- Main Content -->
     <main class="main-content">
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
         {% block content %}
         {% endblock %}
     </main>
+
+    <script src="/static/js/script.js"></script>
 </body>
 </html>
