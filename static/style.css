@@ -290,6 +290,16 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+.message-success {
+    color: #2E7D32; /* Green, matches theme */
+}
+
+.message-error {
+    color: #D32F2F; /* Red, matches btn-delete */
+    background-color: #FFEBEE; /* Light red background for errors */
+    border-left-color: #D32F2F; /* Red border for errors */
+}
+
 /* Forms */
 form p {
     margin-bottom: 15px;

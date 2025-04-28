@@ -71,13 +71,14 @@
             <!-- Registration Form -->
             <div class="auth-form register-form card">
                 <h2><i class="fas fa-user-plus"></i> Register</h2>
-                {% if messages %}
+                <!-- Messages -->
+                    {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
-                            <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
+                            <li class="message-{{ message.tags }}">{{ message }}</li>
                         {% endfor %}
                     </ul>
-                {% endif %}
+                    {% endif %}
                 <form method="post" action="{% url 'custom_login' %}">
                     {% csrf_token %}
                     <input type="hidden" name="form_type" value="register">
