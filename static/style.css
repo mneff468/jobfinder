@@ -35,12 +35,12 @@ body {
 }
 
 .sidebar.expanded {
-    width: 200px;
+    width: 200px; /* Expand when the 'expanded' class is added */
 }
 
-.sidebar.expanded a span,
+.sidebar.expanded li a span,
 .sidebar.expanded .user-info span {
-    display: inline;
+    display: inline-block !important; /* Force display of tab names */
 }
 
 .sidebar ul {
@@ -103,6 +103,10 @@ body {
     margin-bottom: 10px;
 }
 
+.sidebar .user-info span i {
+    margin-right: 5px;
+}
+
 .sidebar .user-info a {
     color: #FFD700; /* Gold */
     font-weight: 600;
@@ -122,7 +126,6 @@ body {
     transition: margin-left 0.3s ease; /* Smooth transition when sidebar expands */
 }
 
-.sidebar:hover ~ .main-content,
 .sidebar.expanded ~ .main-content {
     margin-left: 200px;
 }
@@ -288,16 +291,6 @@ button:hover {
     border-radius: 5px;
     border-left: 5px solid #2E7D32; /* Green */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.message-success {
-    color: #2E7D32; /* Green, matches theme */
-}
-
-.message-error {
-    color: #D32F2F; /* Red, matches btn-delete */
-    background-color: #FFEBEE; /* Light red background for errors */
-    border-left-color: #D32F2F; /* Red border for errors */
 }
 
 /* Forms */
@@ -635,7 +628,7 @@ form textarea:focus {
 
 /* Job Detail Page */
 .job-header {
-    background: linear-gradient(to right, # manière2E7D32, #4CAF50); /* Green gradient */
+    background: linear-gradient(to right, #2E7D32, #4CAF50); /* Green gradient */
     color: white;
     padding: 20px;
     text-align: center;
@@ -774,25 +767,12 @@ form textarea:focus {
         width: 50px; /* Slightly smaller on mobile */
     }
 
-    .sidebar:hover {
-        width: 50px; /* Disable hover on mobile */
-    }
-
-    .sidebar:hover a span,
-    .sidebar:hover .user-info span {
-        display: none;
-    }
-
     .sidebar.expanded {
         width: 150px;
     }
 
     .main-content {
         margin-left: 50px; /* Match smaller sidebar */
-    }
-
-    .sidebar:hover ~ .main-content {
-        margin-left: 50px; /* No change on hover */
     }
 
     .sidebar.expanded ~ .main-content {
